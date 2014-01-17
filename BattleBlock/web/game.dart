@@ -2,20 +2,23 @@ import 'dart:html';
 
 class Game {
 
-	var canvas;
+	CanvasElement canvas;
 	CanvasRenderingContext2D ctx;
 
-	num lastTime = 0;
+	double lastTime = 0.0;
 
 	void GetContext() {
 		canvas = querySelector("#screen");
 		ctx = canvas.getContext("2d");
+
+		canvas.width = window.innerWidth;
+		canvas.height = window.innerHeight;
 	}
 
 	void GameLoop(newTime) {
 
 		//calculate delta time (dt) to send to all updated objects
-		num dt = (newTime - lastTime) / 1000;
+		double dt = (newTime - lastTime) / 1000;
 		lastTime = newTime;
 
 		//clear screen
