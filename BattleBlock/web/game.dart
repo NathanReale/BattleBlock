@@ -5,7 +5,7 @@ class Game {
   var canvas;
   CanvasRenderingContext2D ctx;
   
-  num lastTime;
+  num lastTime = 0;
   
   void GetContext() {
     canvas = querySelector("#screen");
