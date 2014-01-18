@@ -15,6 +15,7 @@ class Game {
 
 	Keyboard p1 = new Keyboard();
 	Player player;
+	Player player2;
 
 	void getContext() {
 		canvas = querySelector("#screen");
@@ -27,7 +28,8 @@ class Game {
 	}
 
 	void start() {
-		player = new Player(ctx, p1);
+		player = new Player(1, ctx, p1);
+		player2 = new Player(2, ctx, p1);
 		playAudio('media/audio/Tetris Theme A- for that game thing .wav');
 	}
 
@@ -38,12 +40,14 @@ class Game {
 		lastTime = newTime;
 
 		player.update(dt);
+		player2.update(dt);
 
 		//clear screen
 		ctx.fillStyle = "#000000";
 		ctx.fillRect(0, 0, canvas.width, canvas.height);
 
 		player.draw();
+		player2.draw();
 
 		window.animationFrame.then(gameLoop);
 	}

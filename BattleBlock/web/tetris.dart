@@ -11,6 +11,8 @@ class Tetris {
 	double y = 50.0;
 	CanvasRenderingContext2D ctx;
 
+	int player;
+
 	static const int numRows = 22;
 	static const int numCols = 10;
 	List<List<int>> board;
@@ -27,7 +29,7 @@ class Tetris {
 	double stoppedTimer = 0.0;
 	double maxStopTime = 0.5;
 
-	Tetris(this.ctx) {
+	Tetris(this.player, this.ctx) {
 		Piece.init();
 
 		blue = new ImageElement(src:"media/img/blue.png");
@@ -37,6 +39,11 @@ class Tetris {
 		board = new List<List<int>>();
 		for(int i=0; i<numRows; i++) {
 			board.add(new List.filled(numCols, 0));
+		}
+
+		if(player == 2) {
+			x = ctx.canvas.width - blockSize*numCols - x;
+			y = 50.0;
 		}
 
 		current = new Piece.random();
