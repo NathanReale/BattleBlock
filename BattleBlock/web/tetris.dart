@@ -8,7 +8,7 @@ part 'piece.dart';
 class Tetris {
 
 	double x = 75.0;
-	double y = 30.0;
+	double y = 50.0;
 	CanvasRenderingContext2D ctx;
 
 	static const int numRows = 22;
@@ -133,6 +133,23 @@ class Tetris {
 	}
 
 	void checkForRows() {
+		List<int> full = new List();
+		for(int i=0; i<numRows; i++) {
+			bool thisRow = true;
+			for(int j=0; j<numCols; j++) {
+				if(board[i][j] != 1 && board[i][j] != 2) {
+					thisRow = false;
+				}
+			}
+			if(thisRow) {
+				full.add(i);
+			}
+		}
+		full.forEach((e) {
+			for(int j=0; j<numCols; j++) {
+				board[e][j] = 0;
+			}
+		});
 	}
 
 	void moveLeft() {
