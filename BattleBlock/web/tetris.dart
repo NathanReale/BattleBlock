@@ -32,8 +32,8 @@ class Tetris {
 			board[i] = new List.filled(numCols, 0);
 		}
 
-		current = new Piece.random();
 
+		current = new Piece.random();
 	}
 
 	void update(dt) {
@@ -44,8 +44,13 @@ class Tetris {
 		ctx.fillStyle = "#FF0000";
 		for(int i=0; i<numRows; i++) {
 			for(int j=0; j<numCols; j++) {
-				if (board[i][j] == 1) {
-					ctx.fillRect(x + j*blockSize, y + i*blockSize, blockSize, blockSize);
+
+				if(board[i][j] == 1) {
+					ctx.fillStyle = "#FF0000";
+					ctx.fillRect(x + j*blockSize + j, y + i*blockSize + i, blockSize, blockSize);
+				} else if(board[i][j] == 2) {
+					ctx.fillStyle = "#FF0000";
+					ctx.fillRect(x + j*blockSize + j, y + i*blockSize + i, blockSize, blockSize);
 				}
 			}
 		}
@@ -55,7 +60,12 @@ class Tetris {
 				if (current[i][j] == 1) {
 					ctx.fillRect((j + col)*blockSize, (i + row)*blockSize, blockSize, blockSize);
 				}
+
 			}
 		}
+	}
+
+	void add(/*piece*/) {
+
 	}
 }
