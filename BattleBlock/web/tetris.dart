@@ -18,12 +18,17 @@ class Tetris {
 	List<List<int>> board;
 	static const int blockSize = 30;
 
+	ImageElement blue;
+
 	Piece current;
 	int col = 0;
 	double row = 0.0;
+	int speed = 2;
 
 	Tetris(this.ctx) {
 		Piece.init();
+
+		blue = new ImageElement(src:"media/img/blue.png");
 
 		board = new List(numRows);
 		for(int i=0; i<numRows; i++) {
@@ -34,9 +39,9 @@ class Tetris {
 	}
 
 	void update(dt) {
-		row += dt* 4;
+		row += dt* speed;
 		if (!valid()) {
-			row -= dt*4;
+			row -= dt*speed;
 			merge();
 			row = 0.0;
 			col = 0;
@@ -46,15 +51,17 @@ class Tetris {
 	}
 
 	void draw() {
+
+		ctx.fillStyle = "#FFFFFF";
+		ctx.fillRect(x, y, blockSize*numCols, blockSize*numRows);
+
 		ctx.fillStyle = "#FF0000";
 		for(int i=0; i<numRows; i++) {
 			for(int j=0; j<numCols; j++) {
 
 				if(board[i][j] == 1) {
-					ctx.fillStyle = "#FF0000";
-					ctx.fillRect(x + j*blockSize, y + i*blockSize, blockSize, blockSize);
+					ctx.drawImage(blue, x + j*blockSize, y+i*blockSize);
 				} else if(board[i][j] == 2) {
-					ctx.fillStyle = "#FF0000";
 					ctx.fillRect(x + j*blockSize, y + i*blockSize, blockSize, blockSize);
 				}
 			}
@@ -75,7 +82,9 @@ class Tetris {
 
 		for(int i=0; i<4; i++) {
 			for(int j=0; j<4; j++) {
-				if (current[i][j] != 0 && (i + r >= numRows || board[i + r][j + col] != 0)) {
+				print(col+j);
+				if (current[i][j] != 0 && ((col + j) < 0 || (col + j) >= numCols ||  i + r >= numRows || board[i + r][j + col] != 0)) {
+					print(j);
 					return false;
 				}
 			}
@@ -95,7 +104,21 @@ class Tetris {
 		}
 	}
 
-	void add(/*piece*/) {
+	void moveLeft() {
+		col -= 1;
+		if(!valid()) {
+			col += 1;
+		}
+	}
 
+	void moveRight() {
+		col += 1;
+		if(!valid()) {
+			col -= 1;
+		}
+	}
+
+	void setSpeed(int n) {
+		speed = n;
 	}
 }

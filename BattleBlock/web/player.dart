@@ -12,11 +12,17 @@ class Player {
 	}
 
 	update(dt) {
+
+		board.setSpeed(2);
+
 		if(keys.isPressed(37, true)) {
-			print('left');
+			board.moveLeft();
 		}
 		else if(keys.isPressed(39, true)) {
-			print('right!');
+			board.moveRight();
+		}
+		else if(keys.isPressed(40)) {
+			board.setSpeed(12);
 		}
 		board.update(dt);
 	}
