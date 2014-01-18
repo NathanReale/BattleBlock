@@ -3,8 +3,6 @@ import 'dart:math' as Math;
 import 'tetris.dart';
 import 'keyboard.dart';
 
-
-
 class Player {
 
 	int player;

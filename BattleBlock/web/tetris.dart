@@ -33,6 +33,7 @@ class Tetris {
 	double maxStopTime = 0.5;
 
 	int finished_rows = 0;
+	int rowsToAdd = 0;
 
 	Tetris(this.player, this.ctx) {
 		Piece.init();
@@ -142,6 +143,7 @@ class Tetris {
 	void setPiece() {
 		merge();
 		checkForRows();
+		addRows(rowsToAdd);
 		row = 0.0;
 		col = 0;
 		current = new Piece.random();

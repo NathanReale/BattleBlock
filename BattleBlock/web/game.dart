@@ -60,12 +60,12 @@ class Game {
 		player2.update(dt);
 
 		if (player1.board.finished_rows > 0) {
-			player2.board.addRows(player1.board.finished_rows);
+			player2.board.rowsToAdd = player1.board.finished_rows;
 			player1.board.finished_rows = 0;
 		}
 
 		if (player2.board.finished_rows > 0) {
-			player1.board.addRows(player2.board.finished_rows);
+			player1.board.rowsToAdd = player2.board.finished_rows;
 			player2.board.finished_rows = 0;
 		}
 
