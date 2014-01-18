@@ -153,6 +153,11 @@ class Tetris {
 		}
 	}
 
+	void rotate(int dir) {
+		current.rotate(dir);
+		if (!valid()) current.rotate(-dir);
+	}
+
 	void resetSpeed() {
 		speed = 2;
 	}

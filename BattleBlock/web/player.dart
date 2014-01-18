@@ -15,14 +15,14 @@ class Player {
 
 		board.resetSpeed();
 
-		if(keys.isPressed(37, true)) {
+		if(keys.isPressed(KeyCode.LEFT, true)) {
 			board.moveLeft();
-		}
-		else if(keys.isPressed(39, true)) {
+		} else if(keys.isPressed(KeyCode.RIGHT, true)) {
 			board.moveRight();
-		}
-		else if(keys.isPressed(40)) {
+		} else if(keys.isPressed(KeyCode.DOWN)) {
 			board.moveDown();
+		} else if(keys.isPressed(KeyCode.SPACE, true)) {
+			board.rotate(1);
 		}
 		board.update(dt);
 	}
