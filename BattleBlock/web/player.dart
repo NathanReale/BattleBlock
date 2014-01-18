@@ -19,9 +19,9 @@ class Player {
 		board.resetSpeed();
 
 		if (keys.isAnyPressed(controls[Control.LEFT], true)) {
-			board.moveLeft();
+			board.move(-1);
 		} else if (keys.isAnyPressed(controls[Control.RIGHT], true)) {
-			board.moveRight();
+			board.move(1);
 		} else if (keys.isAnyPressed(controls[Control.DOWN])) {
 			board.moveDown();
 		} else if (keys.isAnyPressed(controls[Control.ROT_L], true)) {
@@ -29,29 +29,6 @@ class Player {
 		} else if (keys.isAnyPressed(controls[Control.ROT_R], true)) {
 			board.rotate(1);
 		}
-
-// 		if(player == 1) {
-//			if(keys.isPressed(KeyCode.LEFT, true)) {
-//				board.moveLeft();
-//			} else if(keys.isPressed(KeyCode.RIGHT, true)) {
-//				board.moveRight();
-//			} else if(keys.isPressed(KeyCode.DOWN)) {
-//				board.moveDown();
-//			} else if(keys.isPressed(KeyCode.SPACE, true)) {
-//				board.rotate(1);
-//			}
-// 		}
-// 		else if(player == 2) {
-//	 		if(keys.isPressed(KeyCode.A, true)) {
-//				board.moveLeft();
-//			} else if(keys.isPressed(KeyCode.D, true)) {
-//				board.moveRight();
-//			} else if(keys.isPressed(KeyCode.S)) {
-//				board.moveDown();
-//			} else if(keys.isPressed(KeyCode.W, true)) {
-//				board.rotate(1);
-//			}
-// 		}
 
 		board.update(dt);
 	}

@@ -162,17 +162,10 @@ class Tetris {
 		});
 	}
 
-	void moveLeft() {
-		col -= 1;
+	void move(int dir) {
+		col += dir;
 		if(!valid()) {
-			col += 1;
-		}
-	}
-
-	void moveRight() {
-		col += 1;
-		if(!valid()) {
-			col -= 1;
+			col -= dir;
 		}
 	}
 
