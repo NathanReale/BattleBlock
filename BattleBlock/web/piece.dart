@@ -1,7 +1,7 @@
 part of tetris;
 
 class Piece {
-	static const numPieces = 5;
+	static const numPieces = 7;
 	static List<Piece> pieces = new List<Piece>(numPieces);
 	static Math.Random rand = new Math.Random();
 
@@ -21,6 +21,16 @@ class Piece {
 							   new Rotation([[0, 0, 1, 0], [0, 1, 1, 1], [0, 0, 0, 0], [0, 0, 0, 0]]),
 							   new Rotation([[0, 0, 1, 0], [0, 1, 1, 0], [0, 0, 1, 0], [0, 0, 0, 0]]),
 	   						   new Rotation([[0, 1, 1, 1], [0, 0, 1, 0], [0, 0, 0, 0], [0, 0, 0, 0]])]);
+
+		pieces[5] = new Piece([new Rotation([[0, 0, 0, 0], [0, 1, 0, 0], [0, 1, 0, 0], [0, 1, 1, 0]]),
+							   new Rotation([[0, 0, 0, 0], [1, 1, 1, 0], [1, 0, 0, 0], [0, 0, 0, 0]]),
+							   new Rotation([[0, 1, 1, 0], [0, 0, 1, 0], [0, 0, 1, 0], [0, 0, 0, 0]]),
+							   new Rotation([[0, 0, 0, 0], [0, 0, 0, 1], [0, 1, 1, 1], [0, 0, 0, 0]])]);
+
+		pieces[6] = new Piece([new Rotation([[0, 0, 0, 0], [0, 0, 1, 0], [0, 0, 1, 0], [0, 1, 1, 0]]),
+		  					   new Rotation([[0, 0, 0, 0], [0, 1, 1, 1], [0, 0, 0, 1], [0, 0, 0, 0]]),
+			 				   new Rotation([[0, 1, 1, 0], [0, 1, 0, 0], [0, 1, 0, 0], [0, 0, 0, 0]]),
+				  			   new Rotation([[0, 0, 0, 0], [1, 0, 0, 0], [1, 1, 1, 0], [0, 0, 0, 0]])]);
 	}
 
 	List<Rotation> rotations;
