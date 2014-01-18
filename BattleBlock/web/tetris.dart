@@ -18,6 +18,7 @@ class Tetris {
 	List<List<int>> board;
 	static const int blockSize = 30;
 
+	ImageElement playerColor;
 	ImageElement blue, red, magic;
 
 	Piece current;
@@ -42,8 +43,11 @@ class Tetris {
 		}
 
 		if(player == 2) {
+			playerColor = red;
 			x = ctx.canvas.width - blockSize*numCols - x;
 			y = 50.0;
+		} else {
+			playerColor = blue;
 		}
 
 		current = new Piece.random();
@@ -89,7 +93,7 @@ class Tetris {
 			for(int j=0; j<numCols; j++) {
 
 				if(board[i][j] == 1) {
-					ctx.drawImage(blue, x + j*blockSize, y+i*blockSize);
+					ctx.drawImage(playerColor, x + j*blockSize, y+i*blockSize);
 				} else if(board[i][j] == 2) {
 					ctx.fillRect(x + j*blockSize, y + i*blockSize, blockSize, blockSize);
 				}

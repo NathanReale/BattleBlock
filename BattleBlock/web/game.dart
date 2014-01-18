@@ -11,6 +11,8 @@ class Game {
 	CanvasRenderingContext2D ctx;
 	int width, height;
 
+	ImageElement background;
+
 	double lastTime = 0.0;
 
 	Keyboard p1 = new Keyboard();
@@ -28,6 +30,7 @@ class Game {
 	}
 
 	void start() {
+		background = new ImageElement(src:"media/img/background.png");
 
 		player = new Player(1, ctx, p1);
 		player2 = new Player(2, ctx, p1);
@@ -54,8 +57,10 @@ class Game {
 		player2.update(dt);
 
 		//clear screen
-		ctx.fillStyle = "#000000";
-		ctx.fillRect(0, 0, canvas.width, canvas.height);
+		//ctx.fillStyle = "#000000";
+		//ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+		ctx.drawImage(background, 0, 0);
 
 		player.draw();
 		player2.draw();
