@@ -33,6 +33,8 @@ class Game {
 		double dt = (newTime - lastTime) / 1000;
 		lastTime = newTime;
 
+		player1.update(dt);
+
 		//clear screen
 		ctx.fillStyle = "#000000";
 		ctx.fillRect(0, 0, canvas.width, canvas.height);
