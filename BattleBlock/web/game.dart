@@ -1,7 +1,7 @@
 import 'dart:html';
-import 'dart:web_audio';
 
 import 'keyboard.dart';
+import 'audio.dart';
 import 'tetris.dart';
 import 'player.dart';
 
@@ -28,7 +28,9 @@ class Game {
 
 	void start() {
 		player = new Player(ctx, p1);
-		playAudio('media/audio/Tetris Theme A- for that game thing .wav');
+		SoundManager.load(['media/audio/Tetris Theme A- for that game thing .wav'], () {
+			SoundManager.play('media/audio/Tetris Theme A- for that game thing .wav');
+		});
 	}
 
 	void gameLoop(newTime) {
@@ -36,6 +38,14 @@ class Game {
 		//calculate delta time (dt) to send to all updated objects
 		double dt = (newTime - lastTime) / 1000;
 		lastTime = newTime;
+
+		if (p1.isPressed(KeyCode.M, true)) {
+			if (SoundManager.playing()) {
+				SoundManager.stop();
+			} else {
+				SoundManager.play('media/audio/Tetris Theme A- for that game thing .wav');
+			}
+		}
 
 		player.update(dt);
 
@@ -48,23 +58,4 @@ class Game {
 		window.animationFrame.then(gameLoop);
 	}
 
-	void playAudio(String filename) {
-		AudioContext audioContext = new AudioContext();
-	  	GainNode gainNode = audioContext.createGainNode();
-
-
-		HttpRequest.request(filename, responseType: 'arraybuffer').then((response) {
-			audioContext.decodeAudioData(response.response).then((buffer) {
-				playSound() {
-					AudioBufferSourceNode source = audioContext.createBufferSource();
-					source.loop = true;
-					source.connectNode(gainNode, 0, 0);
-					gainNode.connectNode(audioContext.destination, 0, 0);
-					source.buffer = buffer;
-					source.start(0);
-				}
-				playSound();
-			});
-		});
-	}
 }
