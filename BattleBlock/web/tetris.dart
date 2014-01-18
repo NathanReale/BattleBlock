@@ -15,6 +15,7 @@ class Tetris {
 
 	int player;
 
+	static const int boardHeight = 24;
 	static const int numRows = 22;
 	static const int numCols = 10;
 	List<List<int>> board;
@@ -90,8 +91,10 @@ class Tetris {
 
 	void draw() {
 
-		ctx.fillStyle = "#FFFFFF";
+		ctx.fillStyle = "#000000";
+		ctx.globalAlpha = 0.5;
 		ctx.fillRect(x, y, blockSize*numCols, blockSize*numRows);
+		ctx.globalAlpha = 1.0;
 
 		ctx.fillStyle = "#FF0000";
 		for(int i=0; i<numRows; i++) {

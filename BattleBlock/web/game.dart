@@ -78,6 +78,11 @@ class Game {
 		player1.draw();
 		player2.draw();
 
+		ctx.fillStyle = "000000";
+		ctx.globalAlpha = 0.5;
+		ctx.fillRect(400, 50, 225, 400);
+		ctx.globalAlpha = 1.0;
+
 		window.animationFrame.then(gameLoop);
 	}
 
