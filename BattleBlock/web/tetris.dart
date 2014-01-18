@@ -103,7 +103,7 @@ class Tetris {
 		for(int i=0; i<4; i++) {
 			for(int j=0; j<4; j++) {
 				if (current[i][j] == 1) {
-					ctx.fillRect(x + (j + col)*blockSize, y + (i + row)*blockSize, blockSize, blockSize);
+					ctx.drawImage(current.color, x + (j + col)*blockSize, y + (i + row)*blockSize);
 				}
 
 			}
