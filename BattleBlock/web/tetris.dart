@@ -25,6 +25,10 @@ class Tetris {
 	double row = 0.0;
 	int speed = 2;
 
+	bool stopped = false;
+	double stoppedTimer = 0.0;
+	double maxStopTime = 2.0;
+
 	Tetris(this.ctx) {
 		Piece.init();
 
@@ -39,15 +43,34 @@ class Tetris {
 	}
 
 	void update(dt) {
-		row += dt* speed;
-		if (!valid()) {
-			row -= dt*speed;
-			merge();
-			row = 0.0;
-			col = 0;
-			current = new Piece.random();
-		}
 
+		if(!stopped) {
+			row += dt*speed;
+			if (!valid()) {
+				row -= dt*speed;
+				row = row.ceil() * 1.0;
+				print(row);
+				stopped = true;
+				stoppedTimer = maxStopTime;
+			}
+		}
+		else {
+			row += dt*speed;
+			if(valid()) {
+				stopped = false;
+				stoppedTimer = 0.0;
+			}
+			else {
+				row -= dt*speed;
+				row = row.ceil() * 1.0;
+				stoppedTimer -= maxStopTime*dt;
+				if(stoppedTimer < 0) {
+					stoppedTimer = 0.0;
+					stopped = false;
+					setPiece();
+				}
+			}
+		}
 	}
 
 	void draw() {
@@ -104,6 +127,13 @@ class Tetris {
 		}
 	}
 
+	void setPiece() {
+		merge();
+		row = 0.0;
+		col = 0;
+		current = new Piece.random();
+	}
+
 	void moveLeft() {
 		col -= 1;
 		if(!valid()) {
@@ -118,7 +148,17 @@ class Tetris {
 		}
 	}
 
-	void setSpeed(int n) {
-		speed = n;
+	void moveDown() {
+		if(stopped) {
+			stoppedTimer = 0.0;
+			stopped = false;
+			setPiece();
+		} else {
+			speed = 12;
+		}
+	}
+
+	void resetSpeed() {
+		speed = 2;
 	}
 }

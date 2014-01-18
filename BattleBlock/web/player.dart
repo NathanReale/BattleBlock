@@ -13,7 +13,7 @@ class Player {
 
 	update(dt) {
 
-		board.setSpeed(2);
+		board.resetSpeed();
 
 		if(keys.isPressed(37, true)) {
 			board.moveLeft();
@@ -22,7 +22,7 @@ class Player {
 			board.moveRight();
 		}
 		else if(keys.isPressed(40)) {
-			board.setSpeed(12);
+			board.moveDown();
 		}
 		board.update(dt);
 	}
