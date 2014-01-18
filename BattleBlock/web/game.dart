@@ -1,9 +1,11 @@
 import 'dart:html';
+import 'dart:math' as Math;
 
 import 'keyboard.dart';
 import 'audio.dart';
-import 'tetris.dart';
 import 'player.dart';
+
+
 
 class Game {
 
@@ -16,7 +18,7 @@ class Game {
 	double lastTime = 0.0;
 
 	Keyboard p1 = new Keyboard();
-	Player player;
+	Player player1;
 	Player player2;
 
 
@@ -33,7 +35,7 @@ class Game {
 	void start() {
 		background = new ImageElement(src:"media/img/background.png");
 
-		player = new Player(1, ctx, p1, new Controls.player1());
+		player1 = new Player(1, ctx, p1, new Controls.player1());
 		player2 = new Player(2, ctx, p1, new Controls.player2());
 		SoundManager.load(['media/audio/Tetris Theme A- for that game thing .wav'], () {
 			SoundManager.play('media/audio/Tetris Theme A- for that game thing .wav');
@@ -54,8 +56,18 @@ class Game {
 			}
 		}
 
-		player.update(dt);
+		player1.update(dt);
 		player2.update(dt);
+
+		if (player1.board.finished_rows > 0) {
+			player2.board.addRows(player1.board.finished_rows);
+			player1.board.finished_rows = 0;
+		}
+
+		if (player2.board.finished_rows > 0) {
+			player1.board.addRows(player2.board.finished_rows);
+			player2.board.finished_rows = 0;
+		}
 
 		//clear screen
 		//ctx.fillStyle = "#000000";
@@ -63,7 +75,7 @@ class Game {
 
 		ctx.drawImage(background, 0, 0);
 
-		player.draw();
+		player1.draw();
 		player2.draw();
 
 		window.animationFrame.then(gameLoop);

@@ -5,6 +5,8 @@ import 'dart:math' as Math;
 
 part 'piece.dart';
 
+Math.Random rand = new Math.Random();
+
 class Tetris {
 
 	double x = 75.0;
@@ -29,6 +31,8 @@ class Tetris {
 	bool stopped = false;
 	double stoppedTimer = 0.0;
 	double maxStopTime = 0.5;
+
+	int finished_rows = 0;
 
 	Tetris(this.player, this.ctx) {
 		Piece.init();
@@ -150,6 +154,7 @@ class Tetris {
 			for(int j=0; j<numCols; j++) {
 				if(board[i][j] != 1 && board[i][j] != 2) {
 					thisRow = false;
+					break;
 				}
 			}
 			if(thisRow) {
@@ -159,6 +164,7 @@ class Tetris {
 		full.forEach((e) {
 			board.removeAt(e);
 			board.insert(0, new List.filled(numCols, 0));
+			finished_rows++;
 		});
 	}
 
@@ -186,5 +192,16 @@ class Tetris {
 
 	void resetSpeed() {
 		speed = 2;
+	}
+
+	void addRows(int count) {
+		List<int> newRow = new List.filled(numCols, 1);
+		newRow[rand.nextInt(numCols)] = 0;
+
+		for (int i = 0; i < count; i++) {
+			board.removeAt(0);
+
+			board.insert(numRows - 1, newRow.toList());
+		}
 	}
 }
