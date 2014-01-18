@@ -34,9 +34,9 @@ class Tetris {
 		red = new ImageElement(src:"media/img/red.png");
 		magic = new ImageElement(src:"media/img/magic.png");
 
-		board = new List(numRows);
+		board = new List<List<int>>();
 		for(int i=0; i<numRows; i++) {
-			board[i] = new List.filled(numCols, 0);
+			board.add(new List.filled(numCols, 0));
 		}
 
 		current = new Piece.random();
@@ -146,9 +146,8 @@ class Tetris {
 			}
 		}
 		full.forEach((e) {
-			for(int j=0; j<numCols; j++) {
-				board[e][j] = 0;
-			}
+			board.removeAt(e);
+			board.insert(0, new List.filled(numCols, 0));
 		});
 	}
 
