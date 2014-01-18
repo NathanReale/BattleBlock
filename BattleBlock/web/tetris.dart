@@ -9,23 +9,19 @@ class Tetris {
 	double y = 30.0;
 	CanvasRenderingContext2D ctx;
 
-	int numRows = 22;
-	int numCols = 10;
-	List<List<int>> board = new List(22);
-	int blockSize = 30;
+	static const int numRows = 22;
+	static const int numCols = 10;
+	List<List<int>> board;
+	static const int blockSize = 30;
 
 	Keyboard keys;
 
 	Tetris(this.ctx, Keyboard k) {
+		board = new List(numRows);
 		for(int i=0; i<numRows; i++) {
-			board[i] = new List(10);
+			board[i] = new List.filled(numCols, 0);
 		}
 
-		for(int i=0; i<numRows; i++) {
-			for(int j=0; j<numCols; j++) {
-				board[i][j] = 1;
-			}
-		}
 	}
 
 	void update(dt) {
