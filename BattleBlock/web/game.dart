@@ -10,7 +10,7 @@ class Game {
 
 	double lastTime = 0.0;
 
-	Keyboard p1;
+	Keyboard p1 = new Keyboard();
 	Tetris player1;
 
 	void getContext() {
@@ -24,7 +24,6 @@ class Game {
 	}
 
 	void start() {
-		p1 = new Keyboard();
 		player1 = new Tetris(ctx, p1);
 	}
 
