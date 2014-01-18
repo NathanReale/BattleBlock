@@ -21,7 +21,6 @@ class Tetris {
 		for(int i=0; i<numRows; i++) {
 			board[i] = new List.filled(numCols, 0);
 		}
-
 	}
 
 	void update(dt) {
@@ -29,11 +28,21 @@ class Tetris {
 	}
 
 	void draw() {
-		ctx.fillStyle = "#FF0000";
 		for(int i=0; i<numRows; i++) {
 			for(int j=0; j<numCols; j++) {
-				ctx.fillRect(x + j*blockSize + j, y + i*blockSize + i, blockSize, blockSize);
+				if(board[i][j] == 1) {
+					ctx.fillStyle = "#FF0000";
+					ctx.fillRect(x + j*blockSize + j, y + i*blockSize + i, blockSize, blockSize);
+				}
+				else if(board[i][j] == 2) {
+					ctx.fillStyle = "#FF0000";
+					ctx.fillRect(x + j*blockSize + j, y + i*blockSize + i, blockSize, blockSize);
+				}
 			}
 		}
+	}
+
+	void add(/*piece*/) {
+
 	}
 }
