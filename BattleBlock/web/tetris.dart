@@ -3,8 +3,6 @@ library tetris;
 import 'dart:html';
 import 'dart:math' as Math;
 
-import 'keyboard.dart';
-
 part 'piece.dart';
 
 class Tetris {
