@@ -3,7 +3,7 @@ part of tetris;
 class Piece {
 	static const numPieces = 7;
 	static List<Piece> pieces = new List<Piece>(numPieces);
-	static List<ImageElement> colors = new List<ImageElement>(numPieces);
+	static List<String> colors = new List<String>(numPieces);
 	static Math.Random rand = new Math.Random();
 
 	static int pieceCounter = 0;
@@ -46,20 +46,20 @@ class Piece {
 				  			   new Rotation([[1, 0, 0, 0], [1, 2, 1, 0], [0, 0, 0, 0], [0, 0, 0, 0]])]);
 
 
-		colors[0] = new ImageElement(src:"media/img/cream.png");
-		colors[1] = new ImageElement(src:"media/img/yellow.png");
-		colors[2] = new ImageElement(src:"media/img/pink.png");
-		colors[3] = new ImageElement(src:"media/img/green.png");
-		colors[4] = new ImageElement(src:"media/img/purple.png");
-		colors[5] = new ImageElement(src:"media/img/red.png");
-		colors[6] = new ImageElement(src:"media/img/blue.png");
+		colors[0] = "cream";
+		colors[1] = "yellow";
+		colors[2] = "pink";
+		colors[3] = "green";
+		colors[4] = "purple";
+		colors[5] = "red";
+		colors[6] = "blue";
 	}
 
 	List<Rotation> rotations;
 	int rotation, row, col;
 	bool magic;
 
-	ImageElement color;
+	String color;
 
 	Piece(this.rotations);
 

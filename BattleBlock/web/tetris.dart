@@ -2,6 +2,7 @@ library tetris;
 
 import 'dart:html';
 import 'dart:math' as Math;
+import 'sprite.dart';
 
 part 'piece.dart';
 
@@ -21,8 +22,7 @@ class Tetris {
 	List<List<int>> board;
 	static const int blockSize = 30;
 
-	ImageElement playerColor;
-	ImageElement blue, red, magic;
+	String playerColor;
 
 	Piece current;
 	int col = 0;
@@ -39,21 +39,17 @@ class Tetris {
 	Tetris(this.player, this.ctx) {
 		Piece.init();
 
-		blue = new ImageElement(src:"media/img/blue.png");
-		red = new ImageElement(src:"media/img/red.png");
-		magic = new ImageElement(src:"media/img/magic.png");
-
 		board = new List<List<int>>();
 		for(int i=0; i<numRows; i++) {
 			board.add(new List.filled(numCols, 0));
 		}
 
 		if(player == 2) {
-			playerColor = red;
+			playerColor = "red";
 			x = ctx.canvas.width - blockSize*numCols - x;
 			y = 50.0;
 		} else {
-			playerColor = blue;
+			playerColor = "blue";
 		}
 
 		current = new Piece.random();
@@ -101,9 +97,11 @@ class Tetris {
 			for(int j=0; j<numCols; j++) {
 
 				if(board[i][j] == 1) {
-					ctx.drawImage(playerColor, x + j*blockSize, y+i*blockSize);
+					//ctx.drawImage(playerColor, x + j*blockSize, y+i*blockSize);
+					Sprite.draw(ctx, playerColor, x + j*blockSize, y + i*blockSize);
 				} else if(board[i][j] == 2) {
-					ctx.drawImage(magic, x + j*blockSize, y + i*blockSize);
+					//ctx.drawImage(magic, x + j*blockSize, y + i*blockSize);
+					Sprite.draw(ctx, "magic", x + j*blockSize, y + i*blockSize);
 				}
 			}
 		}
@@ -111,9 +109,11 @@ class Tetris {
 		for(int i=0; i<4; i++) {
 			for(int j=0; j<4; j++) {
 				if (current.get(i, j) == 1) {
-					ctx.drawImage(current.color, x + (j + col)*blockSize, y + (i + row)*blockSize);
+					//ctx.drawImage(current.color, x + (j + col)*blockSize, y + (i + row)*blockSize);
+					Sprite.draw(ctx, current.color, x + (j + col)*blockSize, y + (i + row)*blockSize);
 				} else if (current.get(i, j) == 2) {
-					ctx.drawImage(magic, x + (j + col)*blockSize, y + (i + row)*blockSize);
+					//ctx.drawImage(magic, x + (j + col)*blockSize, y + (i + row)*blockSize);
+					Sprite.draw(ctx, "magic", x + (j + col)*blockSize, y + (i + row)*blockSize);
 				}
 
 			}

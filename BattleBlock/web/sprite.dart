@@ -1,3 +1,5 @@
+library sprite;
+
 import 'dart:html';
 
 class Sprite {
@@ -24,6 +26,7 @@ class Sprite {
 		images.forEach((k, v) {
 			v.onLoad.listen((e) {
 		    	numLoaded++;
+				print("image loaded");
 				if (numLoaded == numImages) {
 					allLoaded = true;
 				}
@@ -31,7 +34,9 @@ class Sprite {
 		});
 	}
 
-	draw(CanvasRenderingContext2D ctx, String name, double x, double y) {
-		ctx.drawImage(images[name], x, y);
+	static draw(CanvasRenderingContext2D ctx, String name, double x, double y) {
+		if(allLoaded) {
+			ctx.drawImage(images[name], x, y);
+		}
 	}
 }

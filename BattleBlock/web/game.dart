@@ -4,6 +4,7 @@ import 'dart:math' as Math;
 import 'keyboard.dart';
 import 'audio.dart';
 import 'player.dart';
+import 'sprite.dart';
 
 
 
@@ -33,7 +34,8 @@ class Game {
 	}
 
 	void start() {
-		background = new ImageElement(src:"media/img/background.png");
+
+		Sprite.init();
 
 		player1 = new Player(1, ctx, p1, new Controls.player1());
 		player2 = new Player(2, ctx, p1, new Controls.player2());
@@ -73,7 +75,7 @@ class Game {
 		//ctx.fillStyle = "#000000";
 		//ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-		ctx.drawImage(background, 0, 0);
+		Sprite.draw(ctx, "cage", 0.0, 0.0);
 
 		player1.draw();
 		player2.draw();
