@@ -7,7 +7,7 @@ class Game {
 
 	double lastTime = 0.0;
 
-	void GetContext() {
+	void getContext() {
 		canvas = querySelector("#screen");
 		ctx = canvas.getContext("2d");
 
@@ -15,7 +15,7 @@ class Game {
 		canvas.height = window.innerHeight;
 	}
 
-	void GameLoop(newTime) {
+	void gameLoop(newTime) {
 
 		//calculate delta time (dt) to send to all updated objects
 		double dt = (newTime - lastTime) / 1000;
@@ -25,6 +25,6 @@ class Game {
 		ctx.fillStyle = "#000000";
 		ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-		window.animationFrame.then(GameLoop);
+		window.animationFrame.then(gameLoop);
 	}
 }

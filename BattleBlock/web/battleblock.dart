@@ -5,7 +5,7 @@ void main() {
 
 	var game = new Game();
 
-	game.GetContext();
+	game.getContext();
 
-	window.animationFrame.then(game.GameLoop);
+	window.animationFrame.then(game.gameLoop);
 }
