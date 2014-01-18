@@ -1,6 +1,7 @@
 import 'dart:html';
 import 'keyboard.dart';
 import 'tetris.dart';
+import 'player.dart';
 
 class Game {
 
@@ -11,7 +12,7 @@ class Game {
 	double lastTime = 0.0;
 
 	Keyboard p1 = new Keyboard();
-	Tetris player1;
+	Player player;
 
 	void getContext() {
 		canvas = querySelector("#screen");
@@ -24,7 +25,7 @@ class Game {
 	}
 
 	void start() {
-		player1 = new Tetris(ctx, p1);
+		player = new Player(ctx, p1);
 	}
 
 	void gameLoop(newTime) {
@@ -33,13 +34,13 @@ class Game {
 		double dt = (newTime - lastTime) / 1000;
 		lastTime = newTime;
 
-		player1.update(dt);
+		player.update(dt);
 
 		//clear screen
 		ctx.fillStyle = "#000000";
 		ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-		player1.draw();
+		player.draw();
 
 		window.animationFrame.then(gameLoop);
 	}

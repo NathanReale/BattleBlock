@@ -18,20 +18,17 @@ class Tetris {
 	List<List<int>> board;
 	static const int blockSize = 30;
 
-	Keyboard keys;
-
 	Piece current;
 	int col = 0;
 	double row = 0.0;
 
-	Tetris(this.ctx, Keyboard k) {
+	Tetris(this.ctx) {
 		Piece.init();
 
 		board = new List(numRows);
 		for(int i=0; i<numRows; i++) {
 			board[i] = new List.filled(numCols, 0);
 		}
-
 
 		current = new Piece.random();
 	}
