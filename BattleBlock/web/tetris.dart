@@ -37,7 +37,15 @@ class Tetris {
 	}
 
 	void update(dt) {
-		row += dt;
+		row += dt* 4;
+		if (!valid()) {
+			row -= dt*4;
+			merge();
+			row = 0.0;
+			col = 0;
+			current = new Piece.random();
+		}
+
 	}
 
 	void draw() {
@@ -47,10 +55,10 @@ class Tetris {
 
 				if(board[i][j] == 1) {
 					ctx.fillStyle = "#FF0000";
-					ctx.fillRect(x + j*blockSize + j, y + i*blockSize + i, blockSize, blockSize);
+					ctx.fillRect(x + j*blockSize, y + i*blockSize, blockSize, blockSize);
 				} else if(board[i][j] == 2) {
 					ctx.fillStyle = "#FF0000";
-					ctx.fillRect(x + j*blockSize + j, y + i*blockSize + i, blockSize, blockSize);
+					ctx.fillRect(x + j*blockSize, y + i*blockSize, blockSize, blockSize);
 				}
 			}
 		}
@@ -58,9 +66,34 @@ class Tetris {
 		for(int i=0; i<4; i++) {
 			for(int j=0; j<4; j++) {
 				if (current[i][j] == 1) {
-					ctx.fillRect((j + col)*blockSize, (i + row)*blockSize, blockSize, blockSize);
+					ctx.fillRect(x + (j + col)*blockSize, y + (i + row)*blockSize, blockSize, blockSize);
 				}
 
+			}
+		}
+	}
+
+	bool valid() {
+		int r = row.ceil();
+
+		for(int i=0; i<4; i++) {
+			for(int j=0; j<4; j++) {
+				if (current[i][j] != 0 && (i + r >= numRows || board[i + r][j + col] != 0)) {
+					return false;
+				}
+			}
+		}
+
+		return true;
+	}
+
+	void merge() {
+		int r = row.ceil();
+		for(int i=0; i<4; i++) {
+			for(int j=0; j<4; j++) {
+				if (current[i][j] != 0) {
+					board[i + r][j + col] = current[i][j];
+				}
 			}
 		}
 	}
