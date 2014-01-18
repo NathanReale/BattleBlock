@@ -16,7 +16,7 @@ class Tetris {
 	List<List<int>> board;
 	static const int blockSize = 30;
 
-	ImageElement blue;
+	ImageElement blue, red, magic;
 
 	Piece current;
 	int col = 0;
@@ -31,6 +31,8 @@ class Tetris {
 		Piece.init();
 
 		blue = new ImageElement(src:"media/img/blue.png");
+		red = new ImageElement(src:"media/img/red.png");
+		magic = new ImageElement(src:"media/img/magic.png");
 
 		board = new List(numRows);
 		for(int i=0; i<numRows; i++) {
@@ -124,9 +126,13 @@ class Tetris {
 
 	void setPiece() {
 		merge();
+		checkForRows();
 		row = 0.0;
 		col = 0;
 		current = new Piece.random();
+	}
+
+	void checkForRows() {
 	}
 
 	void moveLeft() {
@@ -149,7 +155,7 @@ class Tetris {
 			stopped = false;
 			setPiece();
 		} else {
-			speed = 12;
+			speed = 24;
 		}
 	}
 

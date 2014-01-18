@@ -10,7 +10,6 @@ class Keyboard {
       // If the key is not set yet, set it with a timestamp.
       if (!_keys.containsKey(e.keyCode))
         _keys[e.keyCode] = e.timeStamp;
-		print(e.keyCode);
     });
 
     window.onKeyUp.listen((KeyboardEvent e) {
