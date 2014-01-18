@@ -25,7 +25,7 @@ class Tetris {
 
 	bool stopped = false;
 	double stoppedTimer = 0.0;
-	double maxStopTime = 2.0;
+	double maxStopTime = 0.5;
 
 	Tetris(this.ctx) {
 		Piece.init();
@@ -47,7 +47,6 @@ class Tetris {
 			if (!valid()) {
 				row -= dt*speed;
 				row = row.ceil() * 1.0;
-				print(row);
 				stopped = true;
 				stoppedTimer = maxStopTime;
 			}
@@ -103,9 +102,7 @@ class Tetris {
 
 		for(int i=0; i<4; i++) {
 			for(int j=0; j<4; j++) {
-				print(col+j);
 				if (current[i][j] != 0 && ((col + j) < 0 || (col + j) >= numCols ||  i + r >= numRows || board[i + r][j + col] != 0)) {
-					print(j);
 					return false;
 				}
 			}
