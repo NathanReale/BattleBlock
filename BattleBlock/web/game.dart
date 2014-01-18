@@ -38,7 +38,7 @@ class Game {
 		player1 = new Player(1, ctx, p1, new Controls.player1());
 		player2 = new Player(2, ctx, p1, new Controls.player2());
 		SoundManager.load(['media/audio/Tetris Theme A- for that game thing .wav'], () {
-			SoundManager.play('media/audio/Tetris Theme A- for that game thing .wav');
+			//SoundManager.play('media/audio/Tetris Theme A- for that game thing .wav');
 		});
 	}
 

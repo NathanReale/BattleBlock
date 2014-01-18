@@ -100,15 +100,17 @@ class Tetris {
 				if(board[i][j] == 1) {
 					ctx.drawImage(playerColor, x + j*blockSize, y+i*blockSize);
 				} else if(board[i][j] == 2) {
-					ctx.fillRect(x + j*blockSize, y + i*blockSize, blockSize, blockSize);
+					ctx.drawImage(magic, x + j*blockSize, y + i*blockSize);
 				}
 			}
 		}
 
 		for(int i=0; i<4; i++) {
 			for(int j=0; j<4; j++) {
-				if (current[i][j] == 1) {
+				if (current.get(i, j) == 1) {
 					ctx.drawImage(current.color, x + (j + col)*blockSize, y + (i + row)*blockSize);
+				} else if (current.get(i, j) == 2) {
+					ctx.drawImage(magic, x + (j + col)*blockSize, y + (i + row)*blockSize);
 				}
 
 			}
@@ -120,7 +122,7 @@ class Tetris {
 
 		for(int i=0; i<4; i++) {
 			for(int j=0; j<4; j++) {
-				if (current[i][j] != 0 && ((col + j) < 0 || (col + j) >= numCols ||  i + r >= numRows || board[i + r][j + col] != 0)) {
+				if (current.get(i, j) != 0 && ((col + j) < 0 || (col + j) >= numCols ||  i + r >= numRows || board[i + r][j + col] != 0)) {
 					return false;
 				}
 			}
@@ -133,8 +135,8 @@ class Tetris {
 		int r = row.ceil();
 		for(int i=0; i<4; i++) {
 			for(int j=0; j<4; j++) {
-				if (current[i][j] != 0) {
-					board[i + r][j + col] = current[i][j];
+				if (current.get(i, j) != 0) {
+					board[i + r][j + col] = current.get(i, j);
 				}
 			}
 		}
