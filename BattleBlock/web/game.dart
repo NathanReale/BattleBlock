@@ -19,6 +19,7 @@ class Game {
 	Player player;
 	Player player2;
 
+
 	void getContext() {
 		canvas = querySelector("#screen");
 		ctx = canvas.getContext("2d");
@@ -32,8 +33,8 @@ class Game {
 	void start() {
 		background = new ImageElement(src:"media/img/background.png");
 
-		player = new Player(1, ctx, p1);
-		player2 = new Player(2, ctx, p1);
+		player = new Player(1, ctx, p1, new Controls.player1());
+		player2 = new Player(2, ctx, p1, new Controls.player2());
 		SoundManager.load(['media/audio/Tetris Theme A- for that game thing .wav'], () {
 			SoundManager.play('media/audio/Tetris Theme A- for that game thing .wav');
 		});
