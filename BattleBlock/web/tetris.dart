@@ -143,7 +143,9 @@ class Tetris {
 	void setPiece() {
 		merge();
 		checkForRows();
-		addRows(rowsToAdd);
+		if(rowsToAdd > 0) {
+			addRows(rowsToAdd);
+		}
 		row = 0.0;
 		col = 0;
 		current = new Piece.random();
@@ -205,5 +207,6 @@ class Tetris {
 
 			board.insert(numRows - 1, newRow.toList());
 		}
+		rowsToAdd = 0;
 	}
 }
