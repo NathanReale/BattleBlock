@@ -7,7 +7,7 @@ class Sprite {
 	static Map<String, ImageElement> images = new Map<String, ImageElement>();
 	static int numLoaded = 0;
 
-	static int numImages = 10;
+	static int numImages = 11;
 	static bool allLoaded = false;
 
 	static init() {
@@ -22,6 +22,7 @@ class Sprite {
 
 		images["cage"] = new ImageElement(src:"media/img/background.png");
 		images["p1border"] = new ImageElement(src:"media/img/p1border.png");
+		images["p2border"] = new ImageElement(src:"media/img/p2border.png");
 
 		images.forEach((k, v) {
 			v.onLoad.listen((e) {
