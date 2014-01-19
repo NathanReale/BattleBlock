@@ -28,7 +28,6 @@ class Tetris {
 	double row = 0.0;
 	int speed = 2;
 
-	bool stopped = false;
 	double stoppedTimer = 0.0;
 	double maxStopTime = 0.5;
 
@@ -61,28 +60,42 @@ class Tetris {
 
 	void update(dt) {
 
-		if(!stopped) {
+		if(stoppedTimer > 0.0) {
+			stoppedTimer -= maxStopTime*dt;
+			if(stoppedTimer <= 0.0) {
+				stoppedTimer = 0.0;
+			}
+		}
+
+		if(delayTimer > 0.0) {
+			delayTimer -= pieceDelay*dt;
+			if(delayTimer <= 0.0) {
+				delayTimer = 0.0;
+				print("getting new piece");
+				newPiece();
+			}
+		}
+
+		else if( !isStopped() ) {
 			row += dt*speed;
 			if (!valid()) {
 				row -= dt*speed;
 				row = row.ceil() * 1.0;
-				stopped = true;
 				stoppedTimer = maxStopTime;
 			}
 		}
+
+
 		else {
 			row += dt*speed;
 			if(valid()) {
-				stopped = false;
 				stoppedTimer = 0.0;
 			}
 			else {
 				row -= dt*speed;
 				row = row.ceil() * 1.0;
 				stoppedTimer -= maxStopTime*dt;
-				if(stoppedTimer < 0) {
-					stoppedTimer = 0.0;
-					stopped = false;
+				if(stoppedTimer <= 0) {
 					setPiece();
 				}
 			}
@@ -104,22 +117,28 @@ class Tetris {
 			}
 		}
 
-		for(int i=0; i<4; i++) {
-			for(int j=0; j<4; j++) {
-				if (current.get(i, j) == 1) {
-					//ctx.drawImage(current.color, x + (j + col)*blockSize, y + (i + row)*blockSize);
-					Sprite.draw(ctx, current.color, x + (j + col)*blockSize, y + (i + row)*blockSize);
-				} else if (current.get(i, j) == 2) {
-					//ctx.drawImage(magic, x + (j + col)*blockSize, y + (i + row)*blockSize);
-					Sprite.draw(ctx, "magic", x + (j + col)*blockSize, y + (i + row)*blockSize);
-				}
+		if(current != null) {
+			for(int i=0; i<4; i++) {
+				for(int j=0; j<4; j++) {
+					if (current.get(i, j) == 1) {
+						//ctx.drawImage(current.color, x + (j + col)*blockSize, y + (i + row)*blockSize);
+						Sprite.draw(ctx, current.color, x + (j + col)*blockSize, y + (i + row)*blockSize);
+					} else if (current.get(i, j) == 2) {
+						//ctx.drawImage(magic, x + (j + col)*blockSize, y + (i + row)*blockSize);
+						Sprite.draw(ctx, "magic", x + (j + col)*blockSize, y + (i + row)*blockSize);
+					}
 
+				}
 			}
 		}
 	}
 
 	bool valid() {
 		int r = row.ceil();
+
+		if(current == null) {
+			return true;
+		}
 
 		for(int i=0; i<4; i++) {
 			for(int j=0; j<4; j++) {
@@ -149,8 +168,10 @@ class Tetris {
 		if(rowsToAdd > 0) {
 			addRows(rowsToAdd);
 		}
-		newPiece();
-
+		print("setting delay timer");
+		current = null;
+		delayTimer = pieceDelay;
+		//newPiece();
 	}
 
 	void checkForRows() {
@@ -195,9 +216,8 @@ class Tetris {
 	}
 
 	void moveDown() {
-		if(stopped) {
+		if(isStopped()) {
 			stoppedTimer = 0.0;
-			stopped = false;
 			setPiece();
 		} else {
 			speed = 24;
@@ -245,4 +265,6 @@ class Tetris {
 		col = 3;
 		current = Piece.getNextPiece();
 	}
+
+	bool isStopped() => stoppedTimer > 0.0;
 }
