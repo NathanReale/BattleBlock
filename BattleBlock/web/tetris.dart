@@ -11,13 +11,12 @@ Math.Random rand = new Math.Random();
 class Tetris {
 
 	double x = 75.0;
-	double y = 50.0;
+	double y = -10.0;
 	CanvasRenderingContext2D ctx;
 
 	int player;
 
-	static const int boardHeight = 24;
-	static const int numRows = 22;
+	static const int numRows = 24;
 	static const int numCols = 10;
 	List<List<int>> board;
 	static const int blockSize = 30;
@@ -49,7 +48,7 @@ class Tetris {
 		if(player == 2) {
 			playerColor = "red";
 			x = ctx.canvas.width - blockSize*numCols - x;
-			y = 50.0;
+			y = -10.0;
 		} else {
 			playerColor = "blue";
 		}
@@ -118,9 +117,6 @@ class Tetris {
 
 	bool valid() {
 		int r = row.ceil();
-		if(r < 0) {
-			return true;
-		}
 
 		for(int i=0; i<4; i++) {
 			for(int j=0; j<4; j++) {
@@ -151,6 +147,7 @@ class Tetris {
 			addRows(rowsToAdd);
 		}
 		newPiece();
+
 	}
 
 	void checkForRows() {
@@ -233,15 +230,15 @@ class Tetris {
 	}
 
 	bool didLose() {
-		for (int i = 0; i < numCols - 2; i++) {
-			if (board[1][i] != 0) return true;
+		for (int i = 0; i < numCols; i++) {
+			if (board[2][i] != 0) return true;
 		}
 
 		return false;
 	}
 
 	void newPiece() {
-		row = -2.0;
+		row = 0.0;
 		col = 3;
 		current = Piece.getNextPiece();
 	}
