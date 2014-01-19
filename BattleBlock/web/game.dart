@@ -80,9 +80,11 @@ class Game {
 		player1.draw();
 		player2.draw();
 
+		Sprite.draw(ctx, "tileborder", 422.0, 40.0);
+
 		ctx.fillStyle = "000000";
 		ctx.globalAlpha = 0.5;
-		ctx.fillRect(400, 50, 225, 400);
+		ctx.fillRect(432, 50, 160, 330);
 		ctx.globalAlpha = 1.0;
 
 		window.animationFrame.then(gameLoop);
