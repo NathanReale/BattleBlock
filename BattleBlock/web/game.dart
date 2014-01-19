@@ -28,18 +28,8 @@ class Game {
 
 	int gameState = 0;
 
-
-	void getContext() {
-		canvas = querySelector("#screen");
-		ctx = canvas.getContext("2d");
-
-		width = canvas.width;
-		height = canvas.width;
-
-		start();
-	}
-
-	void start() {
+	void init() {
+		getContext();
 
 		Piece.init();
 		Sprite.init();
@@ -51,11 +41,15 @@ class Game {
 		});
 	}
 
-	void gameLoop(newTime) {
+	void getContext() {
+		canvas = querySelector("#screen");
+		ctx = canvas.getContext("2d");
 
-		//calculate delta time (dt) to send to all updated objects
-		double dt = (newTime - lastTime) / 1000;
-		lastTime = newTime;
+		width = canvas.width;
+		height = canvas.width;
+	}
+
+	void update(double dt) {
 
 		if (p1.isPressed(KeyCode.N, true)) {
 			currentSong = (currentSong + 1) % songs.length;
@@ -77,51 +71,36 @@ class Game {
 		}
 
 		switch (gameState) {
-			case 0:
-				player1.update(dt);
-				player2.update(dt);
+		case 0:
+			player1.update(dt);
+			player2.update(dt);
 
-				if (player1.board.finished_rows > 0) {
-					player2.board.rowsToAdd = player1.board.finished_rows;
-					player1.board.finished_rows = 0;
-				}
+			if (player1.board.finished_rows > 0) {
+				player2.board.rowsToAdd = player1.board.finished_rows;
+				player1.board.finished_rows = 0;
+			}
 
-				if (player2.board.finished_rows > 0) {
-					player1.board.rowsToAdd = player2.board.finished_rows;
-					player2.board.finished_rows = 0;
-				}
+			if (player2.board.finished_rows > 0) {
+				player1.board.rowsToAdd = player2.board.finished_rows;
+				player2.board.finished_rows = 0;
+			}
 
-				break;
-			case 1:
-				break;
+			break;
+		case 1:
+			break;
 		}
 
 		// Check if anyone lost
 		if (player1.board.didLose() || player2.board.didLose()) gameState = 1;
+	}
 
 
+	void draw() {
 		Sprite.draw(ctx, "cage", 0.0, 0.0);
+		Sprite.draw(ctx, "boards", 0.0, 0.0);
 
 		player1.draw();
 		player2.draw();
-
-		Sprite.draw(ctx, "tileborder", 422.0, 30.0);
-
-		ctx.fillStyle = "000000";
-		ctx.globalAlpha = 0.5;
-		ctx.fillRect(442, 50, 140, 360);
-		ctx.globalAlpha = 1.0;
-
-		switch (gameState) {
-			case 0: break;
-			case 1:
-				ctx.fillStyle = '#000000';
-				ctx.fillRect(312, 284, 400, 200);
-				ctx.font = '100px sans-serif';
-				ctx.fillStyle = '#FF0000';
-				ctx.fillText('GAME OVER', 362, 434, 300);
-
-		}
 
 		double placement = 0.0;
 		double scale = 0.70;
@@ -129,10 +108,8 @@ class Game {
 			for(int i=0; i<4; i++) {
 				for(int j=0; j<4; j++) {
 					if (e.get(i, j) == 1) {
-						//ctx.drawImage(current.color, x + (j + col)*blockSize, y + (i + row)*blockSize);
 						Sprite.draw(ctx, e.color, 475*(1/scale) + (j)*30.0, 70*(1/scale) + (i + e.row)*30.0 + placement, scale:scale);
 					} else if (e.get(i, j) == 2) {
-						//ctx.drawImage(magic, x + (j + col)*blockSize, y + (i + row)*blockSize);
 						Sprite.draw(ctx, "magic", 475*(1/scale) + (j)*30.0, 70*(1/scale) + (i + e.row)*30.0 + placement, scale:scale);
 					}
 
@@ -140,6 +117,27 @@ class Game {
 			}
 			placement = placement + 120.0;
 		});
+
+		switch (gameState) {
+		case 0: break;
+		case 1:
+			ctx.fillStyle = '#000000';
+			ctx.fillRect(312, 284, 400, 200);
+			ctx.font = '100px sans-serif';
+			ctx.fillStyle = '#FF0000';
+			ctx.fillText('GAME OVER', 362, 434, 300);
+
+		}
+	}
+
+	void gameLoop(newTime) {
+
+		//calculate delta time (dt) to send to all updated objects
+		double dt = (newTime - lastTime) / 1000;
+		lastTime = newTime;
+
+		update(dt);
+		draw();
 
 		window.animationFrame.then(gameLoop);
 	}

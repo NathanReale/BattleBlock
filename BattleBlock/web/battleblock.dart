@@ -5,7 +5,7 @@ void main() {
 
 	var game = new Game();
 
-	game.getContext();
+	game.init();
 
 	window.animationFrame.then(game.gameLoop);
 }

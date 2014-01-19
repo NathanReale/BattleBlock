@@ -89,20 +89,6 @@ class Tetris {
 
 	void draw() {
 
-		ctx.fillStyle = "#000000";
-		ctx.globalAlpha = 0.5;
-		ctx.fillRect(x, y, blockSize*numCols, blockSize*numRows);
-		ctx.globalAlpha = 1.0;
-
-		if(player == 1) {
-			Sprite.draw(ctx, "p1border", x-20, y-20);
-		}
-		else if (player == 2) {
-			Sprite.draw(ctx, "p2border", x-20, y-20);
-		}
-
-
-		ctx.fillStyle = "#FF0000";
 		for(int i=0; i<numRows; i++) {
 			for(int j=0; j<numCols; j++) {
 
