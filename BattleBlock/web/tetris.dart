@@ -25,7 +25,7 @@ class Tetris {
 	String playerColor;
 
 	Piece current;
-	int col = 0;
+	int col = 3;
 	double row = 0.0;
 	int speed = 2;
 
@@ -163,7 +163,7 @@ class Tetris {
 			addRows(rowsToAdd);
 		}
 		row = 0.0;
-		col = 0;
+		col = 3;
 		current = new Piece.random();
 	}
 
@@ -227,5 +227,13 @@ class Tetris {
 			board.insert(numRows - 1, newRow.toList());
 		}
 		rowsToAdd = 0;
+	}
+
+	bool didLose() {
+		for (int i = 0; i < numCols; i++) {
+			if (board[1][i] != 0) return true;
+		}
+
+		return false;
 	}
 }

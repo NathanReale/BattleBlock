@@ -67,17 +67,13 @@ class Piece {
 		int whichPiece = rand.nextInt(numPieces);
 
 		this.rotations = pieces[whichPiece].rotations;
-		//this.rotations = pieces[whichPiece].rotations.map((rot) => rot.clone()).toList();
 		this.color = colors[whichPiece];
 		this.rotation = 0;
-		this.row = this.col = 0;
+		this.row = 0;
+		this.col = 4;
 
 		this.magic = (++pieceCounter % MAGIC_FREQ == 0);
-//		if (++pieceCounter % MAGIC_FREQ == 0) {
-//			this.rotations.forEach((rot) {
-//				rot[1][1] = 2;
-//			});
-//		}
+
 	}
 
 	void rotate(int x) {
@@ -89,8 +85,6 @@ class Piece {
 		if (val == 2 && !magic) val = 1;
 		return val;
 	}
-
-	//operator [](int i) => this.rotations[this.rotation][i];
 
 }
 
