@@ -91,12 +91,30 @@ void magic_nuke(Tetris cur, Tetris opp) {
 	}
 }
 
+void magic_fill(Tetris cur, Tetris opp) {
+	print("magic fill");
+	magic_all(cur, opp);
+
+	for(int r=0; r < Tetris.numRows; r++) {
+
+		List<int> newRow = new List.filled(Tetris.numCols, 0);
+		int put = 0;
+		for(int c=0; c < Tetris.numCols; c++) {
+			if(cur.board[r][c] == 1 || cur.board[r][c] == 2) {
+				newRow[put] = cur.board[r][c];
+				put++;
+			}
+		}
+		cur.board[r] = newRow;
+	}
+}
+
 
 class Character {
 	final Function m1, m2, m3, m4;
 	const Character(this.m1, this.m2, this.m3, this.m4);
 
-	static const BILL = const Character(magic_drop, magic_split, magic_steal, magic_invert);
-	static const TED = const Character(magic_slide, magic_drop, magic_queue, magic_nuke);
+	static const BILL = const Character(magic_fill, magic_split, magic_steal, magic_invert);
+	static const TED = const Character(magic_drop, magic_slide, magic_queue, magic_nuke);
 }
 

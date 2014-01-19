@@ -71,7 +71,6 @@ class Tetris {
 			delayTimer -= pieceDelay*dt;
 			if(delayTimer <= 0.0) {
 				delayTimer = 0.0;
-				print("getting new piece");
 				newPiece();
 			}
 		}
@@ -168,10 +167,8 @@ class Tetris {
 		if(rowsToAdd > 0) {
 			addRows(rowsToAdd);
 		}
-		print("setting delay timer");
 		current = null;
 		delayTimer = pieceDelay;
-		//newPiece();
 	}
 
 	void checkForRows() {
