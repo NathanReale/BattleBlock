@@ -28,6 +28,20 @@ void magic_queue(Tetris cur, Tetris opp) {
 	opp.magic = 0;
 }
 
+void magic_split(Tetris cur, Tetris opp) {
+	for(int i=cur.findTopRow(); i<Tetris.numRows; i++) {
+		for(int j=2; j<=4; j++) {
+			cur.board[i][j-2] = cur.board[i][j];
+			cur.board[i][j] = 0;
+		}
+
+		for(int j = Tetris.numCols-1; j>=Tetris.numCols-4; j--) {
+			cur.board[i][j] = cur.board[i][j-2];
+			cur.board[i][j-2] = 0;
+		}
+	}
+}
+
 void magic_invert(Tetris cur, Tetris opp) {
 
 	for(int i=opp.findTopRow(); i<Tetris.numRows; i++) {
@@ -56,7 +70,7 @@ class Character {
 	final Function m1, m2, m3, m4;
 	const Character(this.m1, this.m2, this.m3, this.m4);
 
-	static const BILL = const Character(magic_drop, magic_slide, magic_steal, magic_invert);
+	static const BILL = const Character(magic_drop, magic_split, magic_steal, magic_invert);
 	static const TED = const Character(magic_slide, magic_drop, magic_queue, magic_nuke);
 }
 
