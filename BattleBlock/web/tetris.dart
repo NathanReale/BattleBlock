@@ -37,6 +37,7 @@ class Tetris {
 	int rowsToAdd = 0;
 
 	int magic = 0;
+	static const int MAGIC_CAP = 4;
 
 	Tetris(this.player, this.ctx) {
 		Piece.init();
@@ -182,6 +183,7 @@ class Tetris {
 		}
 		full.forEach((e) {
 			magic = board[e].fold(magic, (prev, elm) => prev + (elm == 2 ? 1 : 0));
+			if (magic > MAGIC_CAP) magic = MAGIC_CAP;
 			board.removeAt(e);
 			board.insert(0, new List.filled(numCols, 0));
 			finished_rows++;
