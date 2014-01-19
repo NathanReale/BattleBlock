@@ -114,7 +114,7 @@ class Character {
 	final Function m1, m2, m3, m4;
 	const Character(this.m1, this.m2, this.m3, this.m4);
 
-	static const BILL = const Character(magic_fill, magic_split, magic_steal, magic_invert);
-	static const TED = const Character(magic_drop, magic_slide, magic_queue, magic_nuke);
+	static const BILL = const Character(magic_slide, magic_split, magic_steal, magic_invert);
+	static const TED = const Character(magic_drop, magic_fill, magic_queue, magic_nuke);
 }
 

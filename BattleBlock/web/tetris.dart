@@ -237,7 +237,7 @@ class Tetris {
 		newRow[rand.nextInt(numCols)] = 0;
 
 		for (int i = 0; i < count; i++) {
-			board.removeAt(0);
+			board.removeAt(3);
 
 			board.insert(numRows - 1, newRow.toList());
 		}
@@ -253,7 +253,7 @@ class Tetris {
 
 	bool didLose() {
 		for (int i = 0; i < numCols; i++) {
-			if (board[2][i] != 0) return true;
+			if (board[3][i] != 0) return true;
 		}
 
 		return false;
