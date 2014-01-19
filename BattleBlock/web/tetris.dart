@@ -150,9 +150,7 @@ class Tetris {
 		if(rowsToAdd > 0) {
 			addRows(rowsToAdd);
 		}
-		row = -2.0;
-		col = 3;
-		current = Piece.getNextPiece();
+		newPiece();
 	}
 
 	void checkForRows() {
@@ -240,5 +238,11 @@ class Tetris {
 		}
 
 		return false;
+	}
+
+	void newPiece() {
+		row = -2.0;
+		col = 3;
+		current = Piece.getNextPiece();
 	}
 }
