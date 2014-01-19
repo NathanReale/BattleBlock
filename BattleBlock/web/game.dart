@@ -5,6 +5,7 @@ import 'keyboard.dart';
 import 'audio.dart';
 import 'player.dart';
 import 'sprite.dart';
+import 'tetris.dart';
 
 List<String> songs = ['media/audio/Avatar- The Legend of Korobeiniki.wav',
 					  'media/audio/Chair to Meet You.wav'];
@@ -40,6 +41,7 @@ class Game {
 
 	void start() {
 
+		Piece.init();
 		Sprite.init();
 
 		player1 = new Player(1, ctx, p1, new Controls.player1());
@@ -103,11 +105,11 @@ class Game {
 		player1.draw();
 		player2.draw();
 
-		Sprite.draw(ctx, "tileborder", 422.0, 40.0);
+		Sprite.draw(ctx, "tileborder", 422.0, 30.0);
 
 		ctx.fillStyle = "000000";
 		ctx.globalAlpha = 0.5;
-		ctx.fillRect(432, 50, 160, 330);
+		ctx.fillRect(442, 50, 140, 360);
 		ctx.globalAlpha = 1.0;
 
 		switch (gameState) {
@@ -120,6 +122,24 @@ class Game {
 				ctx.fillText('GAME OVER', 362, 434, 300);
 
 		}
+
+		double placement = 0.0;
+		double scale = 0.70;
+		Piece.nextPieces.forEach((e) {
+			for(int i=0; i<4; i++) {
+				for(int j=0; j<4; j++) {
+					if (e.get(i, j) == 1) {
+						//ctx.drawImage(current.color, x + (j + col)*blockSize, y + (i + row)*blockSize);
+						Sprite.draw(ctx, e.color, 475*(1/scale) + (j + e.col)*30.0, 70*(1/scale) + (i + e.row)*30.0 + placement, scale:scale);
+					} else if (e.get(i, j) == 2) {
+						//ctx.drawImage(magic, x + (j + col)*blockSize, y + (i + row)*blockSize);
+						Sprite.draw(ctx, "magic", 475*(1/scale) + (j + e.col)*30.0, 70*(1/scale) + (i + e.row)*30.0 + placement, scale:scale);
+					}
+
+				}
+			}
+			placement = placement + 120.0;
+		});
 
 		window.animationFrame.then(gameLoop);
 	}

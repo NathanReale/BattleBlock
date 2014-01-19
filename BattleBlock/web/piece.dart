@@ -6,6 +6,8 @@ class Piece {
 	static List<String> colors = new List<String>(numPieces);
 	static Math.Random rand = new Math.Random();
 
+	static List<Piece> nextPieces = new List<Piece>();
+
 	static int pieceCounter = 0;
 	static const int MAGIC_FREQ = 4;
 
@@ -53,6 +55,12 @@ class Piece {
 		colors[4] = "purple";
 		colors[5] = "red";
 		colors[6] = "blue";
+
+		for(int i=0; i<4; i++) {
+			nextPieces.add(new Piece.random());
+		}
+
+		print("pieces in queue: $nextPieces.length");
 	}
 
 	List<Rotation> rotations;
@@ -74,6 +82,13 @@ class Piece {
 
 		this.magic = (++pieceCounter % MAGIC_FREQ == 0);
 
+	}
+
+	static Piece getNextPiece() {
+		Piece next = nextPieces.removeAt(0);
+		nextPieces.add(new Piece.random());
+
+		return next;
 	}
 
 	void rotate(int x) {

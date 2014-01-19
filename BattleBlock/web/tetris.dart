@@ -40,7 +40,6 @@ class Tetris {
 	static const int MAGIC_CAP = 4;
 
 	Tetris(this.player, this.ctx) {
-		Piece.init();
 
 		board = new List<List<int>>();
 		for(int i=0; i<numRows; i++) {
@@ -164,7 +163,7 @@ class Tetris {
 		}
 		row = 0.0;
 		col = 3;
-		current = new Piece.random();
+		current = Piece.getNextPiece();
 	}
 
 	void checkForRows() {

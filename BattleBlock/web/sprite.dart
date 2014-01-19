@@ -40,9 +40,16 @@ class Sprite {
 		});
 	}
 
-	static draw(CanvasRenderingContext2D ctx, String name, double x, double y) {
+	static draw(CanvasRenderingContext2D ctx, String name, double x, double y, {double scale}) {
 		if(allLoaded) {
-			ctx.drawImage(images[name], x, y);
+			if(scale == null) {
+				ctx.drawImage(images[name], x, y);
+			} else {
+				ctx.scale(scale, scale);
+				ctx.drawImage(images[name], x, y);
+				ctx.resetTransform();
+			}
+
 		}
 	}
 }
