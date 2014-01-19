@@ -130,10 +130,10 @@ class Game {
 				for(int j=0; j<4; j++) {
 					if (e.get(i, j) == 1) {
 						//ctx.drawImage(current.color, x + (j + col)*blockSize, y + (i + row)*blockSize);
-						Sprite.draw(ctx, e.color, 475*(1/scale) + (j + e.col)*30.0, 70*(1/scale) + (i + e.row)*30.0 + placement, scale:scale);
+						Sprite.draw(ctx, e.color, 475*(1/scale) + (j)*30.0, 70*(1/scale) + (i + e.row)*30.0 + placement, scale:scale);
 					} else if (e.get(i, j) == 2) {
 						//ctx.drawImage(magic, x + (j + col)*blockSize, y + (i + row)*blockSize);
-						Sprite.draw(ctx, "magic", 475*(1/scale) + (j + e.col)*30.0, 70*(1/scale) + (i + e.row)*30.0 + placement, scale:scale);
+						Sprite.draw(ctx, "magic", 475*(1/scale) + (j)*30.0, 70*(1/scale) + (i + e.row)*30.0 + placement, scale:scale);
 					}
 
 				}
