@@ -118,6 +118,9 @@ class Tetris {
 
 	bool valid() {
 		int r = row.ceil();
+		if(r < 0) {
+			return true;
+		}
 
 		for(int i=0; i<4; i++) {
 			for(int j=0; j<4; j++) {
@@ -147,7 +150,7 @@ class Tetris {
 		if(rowsToAdd > 0) {
 			addRows(rowsToAdd);
 		}
-		row = 0.0;
+		row = -2.0;
 		col = 3;
 		current = Piece.getNextPiece();
 	}
@@ -232,7 +235,7 @@ class Tetris {
 	}
 
 	bool didLose() {
-		for (int i = 0; i < numCols; i++) {
+		for (int i = 0; i < numCols - 2; i++) {
 			if (board[1][i] != 0) return true;
 		}
 
