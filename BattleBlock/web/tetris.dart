@@ -222,8 +222,10 @@ class Tetris {
 	}
 
 	void rotate(int dir) {
-		current.rotate(dir);
-		if (!valid()) current.rotate(-dir);
+		if(current != null) {
+			current.rotate(dir);
+			if (!valid()) current.rotate(-dir);
+		}
 	}
 
 	void resetSpeed() {
