@@ -36,6 +36,8 @@ class Tetris {
 	int finished_rows = 0;
 	int rowsToAdd = 0;
 
+	int magic = 0;
+
 	Tetris(this.player, this.ctx) {
 		Piece.init();
 
@@ -179,10 +181,12 @@ class Tetris {
 			}
 		}
 		full.forEach((e) {
+			magic = board[e].fold(magic, (prev, elm) => prev + (elm == 2 ? 1 : 0));
 			board.removeAt(e);
 			board.insert(0, new List.filled(numCols, 0));
 			finished_rows++;
 		});
+
 	}
 
 	void move(int dir) {

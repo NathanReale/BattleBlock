@@ -1,7 +1,8 @@
 import 'dart:html';
-import 'dart:math' as Math;
 import 'tetris.dart';
 import 'keyboard.dart';
+
+import 'sprite.dart';
 
 class Player {
 
@@ -11,7 +12,9 @@ class Player {
 
 	Controls controls;
 
-	Player(this.player, CanvasRenderingContext2D ctx, this.keys, this.controls) {
+	CanvasRenderingContext2D ctx;
+
+	Player(this.player, this.ctx, this.keys, this.controls) {
 		board = new Tetris(player, ctx);
 	}
 
@@ -36,6 +39,12 @@ class Player {
 
 	draw() {
 		board.draw();
+		ctx.fillStyle = '#000000';
+		ctx.strokeStyle = '#000000';
+		double x = (player == 1 ? 20.0 : 970.0);
+		for (int i = 0; i < board.magic; i++) {
+			Sprite.draw(ctx, 'magic', x, 680.0 - (i*30));
+		}
 	}
 }
 
