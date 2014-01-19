@@ -237,11 +237,13 @@ class Tetris {
 		newRow[rand.nextInt(numCols)] = 0;
 
 		for (int i = 0; i < count; i++) {
-			board.removeAt(3);
+			board.removeAt(0);
 
 			board.insert(numRows - 1, newRow.toList());
 		}
 		rowsToAdd = 0;
+
+		clearTopRows();
 	}
 
 	void removeRows(int count) {
@@ -263,6 +265,14 @@ class Tetris {
 		row = 0.0;
 		col = 3;
 		current = Piece.getNextPiece();
+	}
+
+	void clearTopRows() {
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < numCols; j++) {
+				board[i][j] = 0;
+			}
+		}
 	}
 
 	bool isStopped() => stoppedTimer > 0.0;
