@@ -6,6 +6,8 @@ import 'audio.dart';
 import 'player.dart';
 import 'sprite.dart';
 
+List<String> songs = ['media/audio/Avatar- The Legend of Korobeiniki.wav', 'media/audio/Chair to Meet You.wav'];
+
 
 
 class Game {
@@ -21,6 +23,8 @@ class Game {
 	Keyboard p1 = new Keyboard();
 	Player player1;
 	Player player2;
+
+	int currentSong = 0;
 
 
 	void getContext() {
@@ -39,7 +43,7 @@ class Game {
 
 		player1 = new Player(1, ctx, p1, new Controls.player1());
 		player2 = new Player(2, ctx, p1, new Controls.player2());
-		SoundManager.load(['media/audio/Avatar- The Legend of Korobeiniki.wav'], () {
+		SoundManager.load(songs, () {
 			//SoundManager.play('media/audio/Avatar- The Legend of Korobeiniki.wav');
 		});
 	}
@@ -50,11 +54,16 @@ class Game {
 		double dt = (newTime - lastTime) / 1000;
 		lastTime = newTime;
 
+		if (p1.isPressed(KeyCode.N, true)) {
+			currentSong = (currentSong + 1) % songs.length;
+			SoundManager.play(songs[currentSong]);
+		}
+
 		if (p1.isPressed(KeyCode.M, true)) {
 			if (SoundManager.playing()) {
 				SoundManager.stop();
 			} else {
-				SoundManager.play('media/audio/Avatar- The Legend of Korobeiniki.wav');
+				SoundManager.play(songs[currentSong]);
 			}
 		}
 
