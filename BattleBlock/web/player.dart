@@ -44,10 +44,10 @@ class Player {
 
 			switch (board.magic) {
 				case 0: break;
-				case 1: char.m1(board, opponent.board); board.magic -= 1; break;
-				case 2: char.m2(board, opponent.board); board.magic -= 2; break;
-				case 3: char.m3(board, opponent.board); board.magic -= 3; break;
-				default: char.m4(board, opponent.board); board.magic -= 4; break;
+				case 1: board.magic -= 1; char.m1(board, opponent.board); break;
+				case 2: board.magic -= 2; char.m2(board, opponent.board); break;
+				case 3: board.magic -= 3; char.m3(board, opponent.board); break;
+				default: board.magic -= 4; char.m4(board, opponent.board); break;
 			}
 
 		}
