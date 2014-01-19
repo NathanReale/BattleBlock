@@ -2,8 +2,8 @@ import 'tetris.dart';
 
 
 void magic_all(Tetris cur, Tetris opp) {
-	cur.newPiece();
-	opp.newPiece();
+	cur.delayTimer = cur.pieceDelay;
+	opp.delayTimer = cur.pieceDelay;
 }
 
 
