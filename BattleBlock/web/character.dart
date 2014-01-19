@@ -1,15 +1,18 @@
 import 'tetris.dart';
 
 
+//Removes the bottom n rows from you board
 void magic_drop(Tetris cur, Tetris opp) {
 	cur.removeRows(4);
 }
 
+//Removes n rows from your board and adds n rows to opponent's board
 void magic_slide(Tetris cur, Tetris opp) {
 	cur.removeRows(2);
 	opp.addRows(2);
 }
 
+//steals all of opponent's magic on the board
 void magic_steal(Tetris cur, Tetris opp) {
 	opp.board.forEach((e) {
 		for(int i=0; i<Tetris.numCols; i++) {
@@ -23,11 +26,13 @@ void magic_steal(Tetris cur, Tetris opp) {
 	});
 }
 
+//removes magic from your opponent's queue
 void magic_queue(Tetris cur, Tetris opp) {
 	cur.magic = opp.magic;
 	opp.magic = 0;
 }
 
+//splits board to create 4 empty columns in the middle
 void magic_split(Tetris cur, Tetris opp) {
 	for(int i=cur.findTopRow(); i<Tetris.numRows; i++) {
 		for(int j=2; j<=4; j++) {
@@ -42,6 +47,7 @@ void magic_split(Tetris cur, Tetris opp) {
 	}
 }
 
+//flips all your opponent's blocks and empty spaces
 void magic_invert(Tetris cur, Tetris opp) {
 
 	for(int i=opp.findTopRow(); i<Tetris.numRows; i++) {
@@ -55,6 +61,7 @@ void magic_invert(Tetris cur, Tetris opp) {
 	}
 }
 
+//randomly destroys some blocks on opponent's board
 void magic_nuke(Tetris cur, Tetris opp) {
 	for (int r = 0; r < Tetris.numRows; r++) {
 		for (int c = 0; c < Tetris.numCols; c++) {
