@@ -32,6 +32,9 @@ class Tetris {
 	double stoppedTimer = 0.0;
 	double maxStopTime = 0.5;
 
+	double delayTimer = 0.0;
+	double pieceDelay = 1.0;
+
 	int finished_rows = 0;
 	int rowsToAdd = 0;
 
