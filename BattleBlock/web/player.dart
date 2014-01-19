@@ -1,6 +1,9 @@
+library player;
+
 import 'dart:html';
 import 'tetris.dart';
 import 'keyboard.dart';
+import 'character.dart';
 
 import 'sprite.dart';
 
@@ -10,11 +13,14 @@ class Player {
 	Tetris board;
 	Keyboard keys;
 
+	Character char;
 	Controls controls;
+
+	Player opponent;
 
 	CanvasRenderingContext2D ctx;
 
-	Player(this.player, this.ctx, this.keys, this.controls) {
+	Player(this.player, this.ctx, this.keys, this.controls, this.char) {
 		board = new Tetris(player, ctx);
 	}
 
@@ -32,6 +38,18 @@ class Player {
 			board.rotate(-1);
 		} else if (keys.isAnyPressed(controls[Control.ROT_R], true)) {
 			board.rotate(1);
+		}
+
+		if (keys.isAnyPressed(controls[Control.MAGIC], true)) {
+
+			switch (board.magic) {
+				case 0: break;
+				case 1: char.m1(board, opponent.board); board.magic -= 1; break;
+				case 2: char.m2(board, opponent.board); board.magic -= 2; break;
+				case 3: char.m3(board, opponent.board); board.magic -= 3; break;
+				default: char.m4(board, opponent.board); board.magic -= 4; break;
+			}
+
 		}
 
 		board.update(dt);

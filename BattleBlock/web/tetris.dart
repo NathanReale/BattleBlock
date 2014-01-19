@@ -214,6 +214,13 @@ class Tetris {
 		rowsToAdd = 0;
 	}
 
+	void removeRows(int count) {
+		for (int i = 0; i < count; i++) {
+			board.removeLast();
+			board.insert(0, new List<int>.filled(numCols, 0));
+		}
+	}
+
 	bool didLose() {
 		for (int i = 0; i < numCols; i++) {
 			if (board[1][i] != 0) return true;

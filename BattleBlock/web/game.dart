@@ -1,11 +1,11 @@
 import 'dart:html';
-import 'dart:math' as Math;
 
 import 'keyboard.dart';
 import 'audio.dart';
 import 'player.dart';
 import 'sprite.dart';
 import 'tetris.dart';
+import 'character.dart';
 
 List<String> songs = ['media/audio/Avatar- The Legend of Korobeiniki.wav',
 					  'media/audio/Chair to Meet You.wav'];
@@ -34,11 +34,20 @@ class Game {
 		Piece.init();
 		Sprite.init();
 
-		player1 = new Player(1, ctx, p1, new Controls.player1());
-		player2 = new Player(2, ctx, p1, new Controls.player2());
+
 		SoundManager.load(songs, () {
 			//SoundManager.play('media/audio/Avatar- The Legend of Korobeiniki.wav');
 		});
+
+		initPlayers();
+	}
+
+	void initPlayers() {
+		player1 = new Player(1, ctx, p1, new Controls.player1(), Character.BILL);
+		player2 = new Player(2, ctx, p1, new Controls.player2(), Character.BILL);
+
+		player1.opponent = player2;
+		player2.opponent = player1;
 	}
 
 	void getContext() {
@@ -66,8 +75,7 @@ class Game {
 
 		if (p1.isPressed(KeyCode.P, true)) {
 			gameState = 0;
-			player1 = new Player(1, ctx, p1, new Controls.player1());
-			player2 = new Player(2, ctx, p1, new Controls.player2());
+			initPlayers();
 		}
 
 		switch (gameState) {
