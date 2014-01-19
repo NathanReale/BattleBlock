@@ -121,11 +121,15 @@ class Game {
 		switch (gameState) {
 		case 0: break;
 		case 1:
-			ctx.fillStyle = '#000000';
-			ctx.fillRect(312, 284, 400, 200);
-			ctx.font = '100px sans-serif';
-			ctx.fillStyle = '#FF0000';
-			ctx.fillText('GAME OVER', 362, 434, 300);
+			if(player1.board.didLose()) {
+				Sprite.draw(ctx, "loser", player1.board.x + 50, 175.0);
+				Sprite.draw(ctx, "winner", player2.board.x + 50, 175.0);
+			}
+			else {
+				Sprite.draw(ctx, "winner", player1.board.x + 50, 175.0);
+				Sprite.draw(ctx, "loser", player2.board.x + 50, 175.0);
+			}
+			Sprite.draw(ctx, "gameover", 262.0, 500.0);
 
 		}
 	}

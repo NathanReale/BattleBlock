@@ -22,6 +22,9 @@ class Sprite {
 
 		images["cage"] = new ImageElement(src:"media/img/background.png");
 		images["boards"] = new ImageElement(src:"media/img/boards.png");
+		images["gameover"] = new ImageElement(src:"media/img/gameover.png");
+		images["winner"] = new ImageElement(src:"media/img/winner.png");
+		images["loser"] = new ImageElement(src:"media/img/loser.png");
 
 		images["charles"] = new ImageElement(src:"media/img/Charles.png");
 		images["goat"] = new ImageElement(src:"media/img/Goat_Charles.png");
