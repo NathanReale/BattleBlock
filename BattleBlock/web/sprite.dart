@@ -27,7 +27,6 @@ class Sprite {
 		images.forEach((k, v) {
 			v.onLoad.listen((e) {
 		    	numLoaded++;
-				print("image loaded");
 				if (numLoaded == numImages) {
 					allLoaded = true;
 				}
