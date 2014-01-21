@@ -40,6 +40,8 @@ class Tetris {
 	int magic = 0;
 	static const int MAGIC_CAP = 4;
 
+	int rotateFrame = 0, rotateDir = 0;
+
 	Tetris(this.player, this.ctx) {
 
 		board = new List<List<int>>();
@@ -117,6 +119,14 @@ class Tetris {
 		}
 
 		if(current != null) {
+		  if (rotateFrame > 0) {
+  		    double tx = x + (2 + col)*blockSize, ty = y + (2 + row)*blockSize;
+  		    ctx.save();
+  		    ctx.translate(tx, ty);
+  		    ctx.rotate((30*rotateDir*rotateFrame)*Math.PI/180);
+  		    ctx.translate(-tx, -ty);
+		  }
+
 			for(int i=0; i<4; i++) {
 				for(int j=0; j<4; j++) {
 					if (current.get(i, j) == 1) {
@@ -128,6 +138,11 @@ class Tetris {
 					}
 
 				}
+			}
+
+			if (rotateFrame > 0) {
+  			 ctx.restore();
+  			 rotateFrame--;
 			}
 		}
 	}
@@ -223,8 +238,13 @@ class Tetris {
 
 	void rotate(int dir) {
 		if(current != null) {
-			current.rotate(dir);
-			if (!valid()) current.rotate(-dir);
+		  current.rotate(dir);
+			if (valid()) {
+			  rotateFrame = 3;
+			  rotateDir = dir;
+			} else {
+			  current.rotate(-dir);
+			}
 		}
 	}
 
