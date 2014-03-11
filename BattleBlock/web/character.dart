@@ -92,7 +92,6 @@ void magic_nuke(Tetris cur, Tetris opp) {
 }
 
 void magic_fill(Tetris cur, Tetris opp) {
-	print("magic fill");
 	magic_all(cur, opp);
 
 	for(int r=0; r < Tetris.numRows; r++) {

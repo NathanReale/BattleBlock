@@ -43,8 +43,9 @@ class Game {
 	}
 
 	void initPlayers() {
-		player1 = new Player(1, ctx, p1, new Controls.player1(), Character.BILL);
-		player2 = new Player(2, ctx, p1, new Controls.player2(), Character.TED);
+		player1 = new Player(1, ctx, p1, new Controls.player1(), Character.TED);
+		player2 = new Player(2, ctx, p1, new Controls.player2(), Character.BILL);
+		player1.board.magic = 2;
 
 		player1.opponent = player2;
 		player2.opponent = player1;
